@@ -1,0 +1,103 @@
+{
+  "info": {
+    "name": "Therapist-Patient API Tests",
+    "_postman_id": "abc123-xyz456",
+    "description": "Collection to test registration, login, and therapist assignment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Register Patient 1 (No Therapist)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Patient One\",\n  \"email\": \"patient1@example.com\",\n  \"password\": \"Test@1234\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/auth/patient/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "auth", "patient", "register"]
+        }
+      }
+    },
+    {
+      "name": "2. Register Doctor",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dr. John\",\n  \"email\": \"doctor1@example.com\",\n  \"password\": \"Doctor@123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/auth/doctor/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "auth", "doctor", "register"]
+        }
+      }
+    },
+    {
+      "name": "3. Register Patient 2 (With Doctor)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Patient Two\",\n  \"email\": \"patient2@example.com\",\n  \"password\": \"Test@1234\",\n  \"therapist\": \"<doctor_id_here>\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/auth/patient/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "auth", "patient", "register"]
+        }
+      }
+    },
+    {
+      "name": "4. Login Patient 1",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"patient1@example.com\",\n  \"password\": \"Test@1234\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/auth/patient/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "auth", "patient", "login"]
+        }
+      }
+    },
+    {
+      "name": "5. Assign Therapist to Patient 1",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer <patient1_token_here>" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"therapistId\": \"<doctor_id_here>\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/patient/assign-therapist",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "patient", "assign-therapist"]
+        }
+      }
+    }
+  ]
+}
