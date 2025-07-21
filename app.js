@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 const patientRoutes = require("./routes/patientRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
 const questionRoutes = require("./routes/questionRoutes");
+const answerRoutes = require("./routes/answerRoutes");
 
 const PORT = process.env.PORT || 4000;
 database.connect();
@@ -16,6 +17,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/patient", patientRoutes);
 app.use("/api/resource", resourceRoutes);
 app.use("/api/question", questionRoutes);
+app.use("/api/answer", answerRoutes);
 
 
 app.get("/",(req,res)=>{

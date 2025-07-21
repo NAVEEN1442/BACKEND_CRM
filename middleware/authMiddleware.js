@@ -25,3 +25,14 @@ exports.isDoctor = (req, res, next) => {
     message: "Access denied. Only doctors can perform this action.",
   });
 };
+
+exports.isPatient = (req, res, next) => {
+  if (req.user && req.user.role === 'patient') {
+    return next();
+  }
+
+  return res.status(403).json({
+    success: false,
+    message: "Access denied. Only patients can perform this action.",
+  });
+};
