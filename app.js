@@ -5,7 +5,7 @@ const database = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
 const patientRoutes = require("./routes/patientRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
-
+const questionRoutes = require("./routes/questionRoutes");
 
 const PORT = process.env.PORT || 4000;
 database.connect();
@@ -15,6 +15,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/patient", patientRoutes);
 app.use("/api/resource", resourceRoutes);
+app.use("/api/question", questionRoutes);
 
 
 app.get("/",(req,res)=>{
