@@ -1,5 +1,5 @@
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const multerCloudinary = require('multer-cloudinary');
 require('dotenv').config();
 
 cloudinary.config({
@@ -8,13 +8,15 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: async (req, file) => {
+const storage = multerCloudinary({
+  cloudinary: { cloudinary },
+  params: (req, file) => {
     return {
-      folder: 'resources',
-      resource_type: 'auto', // auto-detect image/pdf/video
-      public_id: Date.now() + '-' + file.originalname,
+      upload: {
+        folder: 'resources',
+        resource_type: 'auto', // auto-detect image/pdf/video
+        public_id: Date.now() + '-' + file.originalname,
+      }
     };
   }
 });
