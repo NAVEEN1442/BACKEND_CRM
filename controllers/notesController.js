@@ -1,6 +1,17 @@
 const Notes = require('../models/Notes');
 const User = require('../models/User');
 
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+const { marked } = require('marked');
+const DOMPurify = createDOMPurify(new JSDOM('').window);
+
+marked.use({
+  breaks: true,
+    gfm: true,
+});
+
+
  const createNote = async (req, res) => {
   const session = await Notes.startSession();
   session.startTransaction();
@@ -20,10 +31,14 @@ const User = require('../models/User');
       return res.status(404).json({ message: 'Patient not found' });
     }
 
+    // Convert Markdown to HTML and sanitize it
+    const parsedContent = await marked.parse(content);
+    const sanitizedContent = DOMPurify.sanitize(parsedContent);
+
     const note = new Notes({
       patient_id,
       doctor_id,
-      content,
+      content: sanitizedContent,
     });
 
     await note.save({ session });
