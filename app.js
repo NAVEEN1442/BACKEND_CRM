@@ -7,6 +7,7 @@ const patientRoutes = require("./routes/patientRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
 const questionRoutes = require("./routes/questionRoutes");
 const answerRoutes = require("./routes/answerRoutes");
+const notesRoutes = require("./routes/notesRoutes");
 
 const PORT = process.env.PORT || 4000;
 database.connect();
@@ -18,6 +19,7 @@ app.use("/api/patient", patientRoutes);
 app.use("/api/resource", resourceRoutes);
 app.use("/api/question", questionRoutes);
 app.use("/api/answer", answerRoutes);
+app.use("/api/notes", notesRoutes);
 
 
 app.get("/",(req,res)=>{
