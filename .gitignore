@@ -48,3 +48,8 @@ Thumbs.db
 .idea/
 *.sublime-project
 *.sublime-workspace
+
+# Ignore test files and directories
+tests/
+scripts/test.js
+jest.config.js
