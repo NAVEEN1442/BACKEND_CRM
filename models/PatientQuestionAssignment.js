@@ -11,6 +11,11 @@ const patientQuestionAssignmentSchema = new mongoose.Schema({
     ref: 'Question',
     required: true,
   },
+  status: {
+    type: String,
+    enum: ['pending','completed'],
+    default: 'pending',
+  },
   assignedAt: {
     type: Date,
     default: Date.now,
