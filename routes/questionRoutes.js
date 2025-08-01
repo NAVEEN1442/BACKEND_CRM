@@ -3,16 +3,20 @@ const router = express.Router();
 
 const { 
   createQuestion, 
-  assignQuestionToPatient, 
-   
+  assignQuestionToPatient,
+  getDoctorQuestions,
+  updateQuestionStatus,
+  getPatientQuestions,
+  getAssignedQuestionsForPatientByDoctor
 } = require('../controllers/questionController');
-const { getPatientQuestions } = require('../controllers/questionController');
+const {verifyToken, isDoctor} = require('../middleware/authMiddleware');
 
-const {verifyToken} = require('../middleware/authMiddleware');
-const {isDoctor} = require('../middleware/authMiddleware');
 
 router.post('/upload-question', verifyToken, isDoctor, createQuestion);
-router.post('/assign-question', verifyToken, isDoctor, assignQuestionToPatient);
-router.get('/:patient_id/questions', verifyToken, getPatientQuestions);
+router.post('/assign', verifyToken, isDoctor, assignQuestionToPatient);
+router.get('/', verifyToken, isDoctor, getDoctorQuestions);
+router.get('/patient', verifyToken, getPatientQuestions);
+router.get('/:patientId', verifyToken, getAssignedQuestionsForPatientByDoctor);
+router.put('/update-status', verifyToken, isDoctor, updateQuestionStatus);
 
 module.exports = router;

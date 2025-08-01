@@ -17,7 +17,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/patient", patientRoutes);
 app.use("/api/resource", resourceRoutes);
-app.use("/api/question", questionRoutes);
+app.use("/api/questions", questionRoutes);
 app.use("/api/answer", answerRoutes);
 app.use("/api/notes", notesRoutes);
 
