@@ -8,6 +8,7 @@ const resourceRoutes = require("./routes/resourceRoutes");
 const questionRoutes = require("./routes/questionRoutes");
 const answerRoutes = require("./routes/answerRoutes");
 const notesRoutes = require("./routes/notesRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 
 const PORT = process.env.PORT || 4000;
 database.connect();
@@ -20,7 +21,9 @@ app.use("/api/resource", resourceRoutes);
 app.use("/api/questions", questionRoutes);
 app.use("/api/answer", answerRoutes);
 app.use("/api/notes", notesRoutes);
+app.use("/api/payments", paymentRoutes);
 
+const errorHandler = require('./middleware/errorHandler');
 
 app.get("/",(req,res)=>{
     return res.json({
@@ -28,6 +31,8 @@ app.get("/",(req,res)=>{
         message:"Your server is running up and running..."
     })
 })
+
+app.use(errorHandler);
 
 app.listen(PORT,()=>{
     console.log(`This server is running at : ${PORT} `)
