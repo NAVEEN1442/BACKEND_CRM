@@ -36,3 +36,27 @@ exports.isPatient = (req, res, next) => {
     message: "Access denied. Only patients can perform this action.",
   });
 };
+
+exports.isAdmin = (req, res, next) => {
+  if (req.user && req.user.role === 'admin') {
+    return next();
+  }
+
+  return res.status(403).json({
+    success: false,
+    message: "Access denied. Only admins can perform this action.",
+  });
+};
+
+// Generic middleware to check for any role(s)
+exports.hasRole = (...roles) => {
+  return (req, res, next) => {
+    if (req.user && roles.includes(req.user.role)) {
+      return next();
+    }
+    return res.status(403).json({
+      success: false,
+      message: `Access denied. Requires role(s): ${roles.join(', ')}.`,
+    });
+  };
+};
