@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
-// Payment model schema
 const paymentSchema = new mongoose.Schema({
   patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'Patient', required: true },
   doctorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Doctor', required: true },
-  invoiceId: { type: String, unique: true, required: true },
+  invoiceId: { type: String, unique: true, required: true }, // index created automatically
   amount: { type: Number, required: true, min: 0 },
   currency: { type: String, default: 'INR' },
   service: { type: String, required: true },
@@ -18,13 +17,10 @@ const paymentSchema = new mongoose.Schema({
   deleted: { type: Boolean, default: false }
 });
 
-// Indexes for performance
+// Keep only useful indexes
 paymentSchema.index({ patientId: 1, doctorId: 1, invoiceId: 1 });
 paymentSchema.index({ status: 1 });
 paymentSchema.index({ paymentDate: 1 });
-paymentSchema.index({ doctorId: 1 });
-paymentSchema.index({ patientId: 1 });
-paymentSchema.index({ invoiceId: 1 });
 
 paymentSchema.pre('save', function(next) {
   this.updatedAt = Date.now();
