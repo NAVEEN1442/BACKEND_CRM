@@ -9,6 +9,8 @@ const questionRoutes = require("./routes/questionRoutes");
 const answerRoutes = require("./routes/answerRoutes");
 const notesRoutes = require("./routes/notesRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
+
+const sessionRoutes = require("./routes/SessionRoutes");
 const progressMetricsRoutes = require("./routes/progressMetricsRoutes");
 
 const PORT = process.env.PORT || 4000;
@@ -23,7 +25,10 @@ app.use("/api/questions", questionRoutes);
 app.use("/api/answer", answerRoutes);
 app.use("/api/notes", notesRoutes);
 app.use("/api/payments", paymentRoutes);
+app.use("/api/session", sessionRoutes);
+
 app.use("/api/progress-metrics", progressMetricsRoutes);
+
 
 const errorHandler = require('./middleware/errorHandler');
 
@@ -39,4 +44,3 @@ app.use(errorHandler);
 app.listen(PORT,()=>{
     console.log(`This server is running at : ${PORT} `)
 })
-
