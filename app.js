@@ -9,6 +9,7 @@ const questionRoutes = require("./routes/questionRoutes");
 const answerRoutes = require("./routes/answerRoutes");
 const notesRoutes = require("./routes/notesRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
+const sharePatientRoutes = require("./routes/shareRoutes");
 
 const sessionRoutes = require("./routes/SessionRoutes");
 const progressMetricsRoutes = require("./routes/progressMetricsRoutes");
@@ -26,6 +27,7 @@ app.use("/api/answer", answerRoutes);
 app.use("/api/notes", notesRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/session", sessionRoutes);
+app.use("/api/shared", sharePatientRoutes);
 
 app.use("/api/progress-metrics", progressMetricsRoutes);
 
