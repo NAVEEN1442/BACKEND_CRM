@@ -13,6 +13,7 @@ const sharePatientRoutes = require("./routes/shareRoutes");
 
 const sessionRoutes = require("./routes/SessionRoutes");
 const progressMetricsRoutes = require("./routes/progressMetricsRoutes");
+const aiSuggestionsRoutes = require("./routes/aiSuggestionsRoutes");
 
 const PORT = process.env.PORT || 4000;
 database.connect();
@@ -30,6 +31,7 @@ app.use("/api/session", sessionRoutes);
 app.use("/api/shared", sharePatientRoutes);
 
 app.use("/api/progress-metrics", progressMetricsRoutes);
+app.use("/api/suggestions", aiSuggestionsRoutes);
 
 
 const errorHandler = require('./middleware/errorHandler');
