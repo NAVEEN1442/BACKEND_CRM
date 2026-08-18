@@ -44,7 +44,7 @@ app.get("/",(req,res)=>{
 })
 
 app.use(errorHandler);
-
+//listen
 app.listen(PORT,()=>{
     console.log(`This server is running at : ${PORT} `)
 })
